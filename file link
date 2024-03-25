@@ -10,4 +10,15 @@ Develop strategy to deepen the application of diagnostic & predictive analytics 
 Phát triển chiến lược để tăng cường ứng dụng phân tích chẩn đoán và dự đoán trong hành trình của khách hàng và quy trình kinh doanh
 Develop group strategy and provide oversight on data and analytics practices across the ecosystem subsidiaries to drive economies of scale
 Phát triển chiến lược và cung cấp sự giám sát về thực hành dữ liệu và phân tích trên các công ty con trong hệ sinh thái để thúc đẩy tính kinh tế theo quy mô
-
+<div className="form-group">
+        <label htmlFor="summarizeContent">Tóm tắt nội dung</label>
+        <input
+          type="text"
+          className="form-control"
+          id="summarizeContent"
+          placeholder="Tóm tắt nội dung"
+          name="summarizeContent"
+          value={state.summarizeContent}
+          onChange={handleChange}
+        />
+      </div>
