@@ -146,3 +146,14 @@ https://confluence.vpbank.com.vn/pages/viewpage.action?pageId=90440926
 
 npx sequelize-cli db:migrate
 
+
+
+Sequelize CLI [Node: 21.7.1, CLI: 6.6.2, ORM: 6.37.1]
+
+Loaded configuration file "config\config.json".
+Using environment "development".
+
+ERROR: Failed to connect to localhost:1433 - A8050000:error:0A000102:SSL routines:ssl_choose_client_version:unsupported protocol:c:\ws\deps\openssl\openssl\ssl\statem\statem_lib.c:1988:     
+
+
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs>
