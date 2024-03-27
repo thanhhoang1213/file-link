@@ -188,3 +188,119 @@ PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs>
   }
 }
 
+
+
+
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs> npm install -g nodemon
+
+added 33 packages in 2s
+
+4 packages are looking for funding
+  run `npm fund` for details
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs> npm run dev
+
+> be@1.0.0 dev     
+> nodemon server.js
+
+[nodemon] 3.1.0
+[nodemon] to restart at any time, enter `rs`  
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node server.js`
+====================================
+http://localhost:5173
+====================================
+server on http://localhost:8888
+Unable to connectDB to the database: AccessDeniedError [SequelizeAccessDeniedError]: Login failed for user 'sa'.
+    at ConnectionManager.connect (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\sequelize\lib\dialects\mssql\connection-manager.js:115:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32 {
+  parent: ConnectionError: Login failed for user 'sa'.
+      at Login7TokenHandler.onErrorMessage (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\handler.js:186:19)
+      at Readable.<anonymous> (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\token-stream-parser.js:18:33)
+      at Readable.emit (node:events:519:28)
+      at addChunk (node:internal/streams/readable:559:12)
+      at readableAddChunkPushObjectMode (node:internal/streams/readable:536:3)
+      at Readable.push (node:internal/streams/readable:391:5)
+      at nextAsync (node:internal/streams/from:194:22)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+    code: 'ELOGIN'
+  },
+  original: ConnectionError: Login failed for user 'sa'.
+      at Login7TokenHandler.onErrorMessage (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\handler.js:186:19)
+      at Readable.<anonymous> (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\token-stream-parser.js:18:33)
+      at Readable.emit (node:events:519:28)
+      at addChunk (node:internal/streams/readable:559:12)
+      at readableAddChunkPushObjectMode (node:internal/streams/readable:536:3)
+      at Readable.push (node:internal/streams/readable:391:5)
+      at nextAsync (node:internal/streams/from:194:22)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+    code: 'ELOGIN'
+  }
+}
+node:internal/process/promises:289
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+AccessDeniedError [SequelizeAccessDeniedError]: Login failed for user 'sa'.
+    at ConnectionManager.connect (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\sequelize\lib\dialects\mssql\connection-manager.js:115:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32 {
+  parent: ConnectionError: Login failed for user 'sa'.
+      at Login7TokenHandler.onErrorMessage (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\handler.js:186:19)
+      at Readable.<anonymous> (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\      at Readable.emit (node:events:519:28)
+      at addChunk (node:internal/streams/readable:559:12)
+      at readableAddChunkPushObjectMode (node:internal/streams/readable:536:3)
+      at Readable.push (node:internal/streams/readable:391:5)
+      at nextAsync (node:internal/streams/from:194:22)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+    code: 'ELOGIN'
+  },
+  original: ConnectionError: Login failed for user 'sa'.
+      at Login7TokenHandler.onErrorMessage (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\handler.js:186:19)
+      at Readable.<anonymous> (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\tedious\lib\token\token-stream-parser.js:18:33)
+      at Readable.emit (node:events:519:28)
+      at addChunk (node:internal/streams/readable:559:12)
+      at readableAddChunkPushObjectMode (node:internal/streams/readable:536:3)
+      at Readable.push (node:internal/streams/readable:391:5)
+      at nextAsync (node:internal/streams/from:194:22)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+    code: 'ELOGIN'
+  }
+}
+
+Node.js v21.7.1
+[nodemon] app crashed - waiting for file changes before starting...
+Terminate batch job (Y/N)? y
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs> npx sequelize-cli db:migrate
+
+Sequelize CLI [Node: 21.7.1, CLI: 6.6.2, ORM: 6.37.1]
+
+Loaded configuration file "config\config.json".
+Using environment "development".
+
+ERROR: Failed to connect to localhost:1433 - A8050000:error:0A000102:SSL routines:ssl_choose_client_version:unsupported protocol:c:\ws\deps\openssl\openssl\ssl\statem\statem_lib.c:1988:     
+
+
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs> npx sequelize-cli db:migrate
+
+Sequelize CLI [Node: 21.7.1, CLI: 6.6.2, ORM: 6.37.1]
+
+Loaded configuration file "config\config.json".
+Using environment "development".
+
+ERROR: Failed to connect to HONEDA-D46513\SQLEXPRESS:1433 - B4480000:error:0A000102:SSL routines:ssl_choose_client_version:unsupported protocol:c:\ws\deps\openssl\openssl\ssl\statem\statem_lib.c:1988:
+
+
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs> npx sequelize-cli db:migrate
+
+Sequelize CLI [Node: 21.7.1, CLI: 6.6.2, ORM: 6.37.1]
+
+Loaded configuration file "config\config.json".
+Using environment "development".
+
+ERROR: Failed to connect to HONEDA-D46513\SQLEXPRESS:1433 - A8200000:error:0A000102:SSL routines:ssl_choose_client_version:unsupported protocol:c:\ws\deps\openssl\openssl\ssl\statem\statem_lib.c:1988:
+
+
