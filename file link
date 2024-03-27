@@ -169,7 +169,8 @@ PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs>
     "password": "Hoangnt30",
     "database": "dev_vBank_eda",
     "logging": "true",
-    "timezone": "+07:00"
+    "timezone": "+07:00",
+    "ssl": true
   },
   "test": {
     "username": "root",
