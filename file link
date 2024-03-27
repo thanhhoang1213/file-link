@@ -267,3 +267,25 @@ AccessDeniedError [SequelizeAccessDeniedError]: Login failed for user 'sa'.
 }
 
 Node.js v21.7.1
+
+
+
+
+
+PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs> npm run dev
+
+> be@1.0.0 dev     
+> nodemon server.js
+
+[nodemon] 3.1.0
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node server.js`
+====================================
+http://10.39.201.72:5173
+====================================
+server on http://localhost:8889
+(node:19580) [SEQUELIZE0006] DeprecationWarning: This database engine version is not supported, please update your database server. More information https://github.com/sequelize/sequelize/blob/main/ENGINE.md
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Connection has been established successfully.
