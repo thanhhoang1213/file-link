@@ -139,3 +139,10 @@ https://confluence.vpbank.com.vn/pages/viewpage.action?pageId=90440926
   }
 }
 
+
+
+
+
+
+npx sequelize-cli db:migrate
+
