@@ -157,3 +157,33 @@ ERROR: Failed to connect to localhost:1433 - A8050000:error:0A000102:SSL routine
 
 
 PS C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs>
+
+
+
+
+{
+  "development": {
+    "host": "HONEDA-D46513\\SQLEXPRESS",
+    "dialect": "mssql",
+    "username": "sa",
+    "password": "Hoangnt30",
+    "database": "dev_vBank_eda",
+    "logging": "true",
+    "timezone": "+07:00"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "10.39.201.72",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "10.39.201.72",
+    "dialect": "mysql"
+  }
+}
+
