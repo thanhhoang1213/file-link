@@ -293,4 +293,54 @@ Connection has been established successfully.
 
 
 
-VITE_BE_ENDPOINT = http://localhost:8888/v1/api/
+VITE_BE_ENDPOINT = http://localhost:8888/v1/ap
+
+
+
+
+
+
+ERROR::: NotFoundRequestError: Resource not found!
+    at catchNotFoundResources (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\src\middlewares\app.middleware.js:15:17)
+    at Layer.handle [as handle_request] (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\layer.js:95:5)      
+    at trim_prefix (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:646:15
+    at next (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:265:14)
+    at Function.handle (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:47:12) {
+  status: 404
+}
+GET / 404 3.960 ms - 61
+ERROR::: NotFoundRequestError: Resource not found!
+    at catchNotFoundResources (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\src\middlewares\app.middleware.js:15:17)
+    at Layer.handle [as handle_request] (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\layer.js:95:5)      
+    at trim_prefix (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:646:15
+    at next (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:265:14)
+    at Function.handle (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:47:12) {
+  status: 404
+}
+GET / 404 2.914 ms - 61
+ERROR::: NotFoundRequestError: Resource not found!
+    at catchNotFoundResources (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\src\middlewares\app.middleware.js:15:17)
+    at Layer.handle [as handle_request] (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\layer.js:95:5)      
+    at trim_prefix (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:646:15
+    at next (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:265:14)
+    at Function.handle (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\hoangnt30\Downloads\Backend-vpbank-nodejs\node_modules\express\lib\router\index.js:47:12) {
+  status: 404
+}
+GET /favicon.ico 404 1.730 ms - 61
+
+
