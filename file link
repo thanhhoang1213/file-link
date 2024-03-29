@@ -296,72 +296,233 @@ Connection has been established successfully.
 VITE_BE_ENDPOINT = http://localhost:8888/v1/ap
 
 
-
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams, useLocation } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import "./ContentPartPage.css";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
+import { contentActions, useContent } from "../../../features/content/contentSlice";
+import {
+  fetchAddContent,
+  fetchContentById,
+  fetchUpdateContent,
+} from "../../../features/content/contentThunk";
+import uploadAPI from "./../../../api/uploadAPI";
+import "./AddEditContent.css";
 
-const VITE_BE_ENDPOINT = import.meta.env.VITE_BE_ENDPOINT;
-
-
-function ContentPartPage() {
+function AddEditContent() {
+  const [state, setState] = useState({
+    categoryName: "",
+    content: "",
+    summarizeContent: "", // Thêm trường summarizeContent
+    contentParts: []
+  });
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
   const params = useParams();
-  const location = useLocation();
-  const [partContent, setPartContent] = useState("");
-  const [categoryName, setCategoryName] = useState("");
-  const [currentPartNumber, setCurrentPartNumber] = useState(params.partNumber);
-  const contentPartCount = location.state ? location.state.contentPartCount : 0;
+  const isEditMode = Boolean(params?.id);
+  const { dataOne } = useContent();
 
   useEffect(() => {
-    const fetchContentPart = async () => {
-      try {
-        // const response = await axios.get(`http://localhost:8888/v1/api/contentpart/${params.contentId}/${currentPartNumber}`);
-        const response = await axios.get(`${VITE_BE_ENDPOINT}contentpart/${params.contentId}/${currentPartNumber}`);
-        setPartContent(response.data.data.partContent);
-        setCategoryName(response.data.data.categoryName);
-      } catch (error) {
-        console.error("Error fetching content part:", error);
+    if (!params?.id) return;
+    
+    dispatch(fetchContentById(params.id)).then((t) => {
+      if (t?.payload?.metadata) {
+        const { metadata } = t.payload;
+        setState((prev) => ({
+          ...prev,
+          categoryName: metadata.categoryName,
+          content: metadata.content,
+          summarizeContent: metadata.summarizeContent,
+          contentParts: metadata.contentParts,
+        }));
       }
+    });
+  
+    return () => {
+      dispatch(contentActions.resetDataOne());
     };
+  }, [params?.id]);
 
-    fetchContentPart();
-  }, [params.contentId, currentPartNumber]);
-
-  const handleNextPart = () => {
-    if (parseInt(currentPartNumber) < contentPartCount) {
-      setCurrentPartNumber(parseInt(currentPartNumber) + 1);
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+  
+    if (!state.categoryName || !state.content) {
+      toast.error("Vui lòng điền tất cả trường!");
+      return;
     }
+  
+    const data = {
+      categoryName: state.categoryName,
+      content: state.content,
+      summarizeContent: state.summarizeContent,
+      contentParts: state.contentParts.map((part) => ({
+        partNumber: part.partNumber,
+        partContent: part.partContent,
+      })),
+    };
+  
+    // Kiểm tra xem params.id có tồn tại không, nếu có gán id từ params.id
+    if (params.id) {
+      data.id = params.id;
+    }
+  
+    dispatch(isEditMode ? fetchUpdateContent(data) : fetchAddContent(data)).then((t) => {
+      if (t?.payload?.metadata) {
+        navigation("/admin/contents");
+      }
+    });
   };
 
-  const handlePreviousPart = () => {
-    if (parseInt(currentPartNumber) > 1) {
-      setCurrentPartNumber(parseInt(currentPartNumber) - 1);
-    }
+  const handleChange = (event) => {
+    const {
+      target: { value, name },
+    } = event;
+
+    setState((prev) => ({ ...prev, [name]: value }));
   };
+
+  const uploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          loader.file.then(async (file) => {
+            try {
+              if (file) {
+                const response = await uploadAPI.postForm([file]);
+
+                resolve({ default: response });
+              }
+            } catch (error) {
+              reject(error);
+            }
+          });
+        });
+      },
+    };
+  };
+
+  const handleAddContentPart = () => {
+    const newContentParts = [...state.contentParts];
+    newContentParts.push({ partNumber: newContentParts.length + 1, partContent: "" });
+    setState((prev) => ({ ...prev, contentParts: newContentParts }));
+  };
+
+  // const handleContentPartChange = (index, value) => {
+  //   const newContentParts = [...state.contentParts];
+  //   newContentParts[index].partContent = value;
+  //   setState((prev) => ({ ...prev, contentParts: newContentParts }));
+  // }
+
+ 
+  const handleContentPartChange = (index, value) => {
+    const newContentParts = [...state.contentParts]; // Tạo bản sao của mảng contentParts
+    newContentParts[index] = { ...newContentParts[index], partContent: value }; // Cập nhật giá trị partContent của phần tử tương ứng
+    setState((prev) => ({ ...prev, contentParts: newContentParts }));
+  };
+
+  // const handleRemoveContentPart = (index) => {
+  //   const newContentParts = [ ...state.contentParts ];
+  //   newContentParts.splice(index, 1);
+  //   setState((prev) => ({ ...prev, contentParts: newContentParts }));
+  // }
+
+  const handleRemoveContentPart = (index) => {
+    const newContentParts = [...state.contentParts];
+    newContentParts.splice(index, 1);
+    setState((prev) => ({ ...prev, contentParts: newContentParts }));
+  };
+
+  function uploadPlugin(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
 
   return (
-    <section className="content-part-page">
-      <div className="container">
-        <div className="content-part">
-          <h3 className="text-center">{categoryName}</h3>
-          <h4>Phần {currentPartNumber}</h4>
-          <div className="content" dangerouslySetInnerHTML={{ __html: partContent }} />
-          <div className="text-center">
-            <Button className="btn btn-part" onClick={handlePreviousPart} disabled={currentPartNumber === 1}>
-              Prev
-            </Button>
-            <Button className="btn btn-part" onClick={handleNextPart} disabled={currentPartNumber === contentPartCount}>
-              Next
-            </Button>
-          </div>
-        </div>
+    <form onSubmit={handleOnSubmit}>
+      <h4 className="text-center">{isEditMode ? "Thay đổi" : "Thêm"} nội dung</h4>
+
+      <div className="form-group">
+        <label htmlFor="categoryName">Tên danh mục</label>
+        <input
+          type="text"
+          className="form-control"
+          id="categoryName"
+          placeholder="VD: Giao thông vận tải đang phát triển"
+          name="categoryName"
+          value={state.categoryName}
+          onChange={handleChange}
+        />
       </div>
-    </section>
+
+      <div className="form-group">
+        <label htmlFor="summarizeContent">Tóm tắt nội dung</label>
+        <input
+          type="text"
+          className="form-control"
+          id="summarizeContent"
+          placeholder="Tóm tắt nội dung"
+          name="summarizeContent"
+          value={state.summarizeContent}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="content">Nội dung</label>
+        <CKEditor
+          editor={ClassicEditor}
+          data={state.content}
+          name="content"
+          onChange={(event, editor) => {
+            handleChange({ target: { value: editor.getData(), name: "content" } });
+          }}
+          config={{
+            extraPlugins: [uploadPlugin],
+          }}
+        />
+      </div>
+
+      {state.contentParts.map((part, index) => (
+        <div key={index} className="part-content-container"> {/* Thêm key={index} vào đây */}
+          <div className="form-group content-part">
+            <label htmlFor={`partContent${index}`}>Nội dung phần {index + 1}</label>
+            <CKEditor
+              editor={ClassicEditor}
+              data={part.partContent}
+              onChange={(event, editor) => {
+                handleContentPartChange(index, editor.getData());
+              }}
+              config={{
+                extraPlugins: [uploadPlugin],
+              }}
+            />
+          </div>
+          <button 
+            type="button"
+            className="btn btn-danger btn-sm delete-part-btn"
+            onClick={() => handleRemoveContentPart(index)}
+          >Xóa</button>
+        </div>
+      ))}
+
+      <div className="my-4">
+        <button type="button" className="btn btn-primary" onClick={handleAddContentPart}>
+          Thêm ND Nhỏ
+        </button>
+      </div>
+      
+
+      <button type="submit" className="btn btn-success">
+        {isEditMode ? "Lưu thay đổi" : "Tạo mới"}
+      </button>
+    </form>
   );
 }
 
-export default ContentPartPage;
+export default AddEditContent;
+
 
 
